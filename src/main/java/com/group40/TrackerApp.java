@@ -29,8 +29,11 @@ public class TrackerApp extends JFrame
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Image icon = new ImageIcon(getClass().getResource("/icon.png")).getImage();
-        setIconImage(icon);
+        ImageIcon rawIcon = new ImageIcon(getClass().getResource("/icon.png"));
+        Image scaledImage = rawIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        JLabel headerLabel = new JLabel(new ImageIcon(scaledImage));
+        add(headerLabel, BorderLayout.NORTH);
+
         cardLayout = new CardLayout();
         container = new JPanel(cardLayout);
 
