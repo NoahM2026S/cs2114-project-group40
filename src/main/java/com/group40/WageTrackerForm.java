@@ -3,6 +3,14 @@ package com.group40;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The Wage Tracker form class that will
+ * visually display the wage tracking interface.
+ * 
+ * @author Amelia Vasquez Rosario
+ * @version September 22, 2026
+ */
+
 public class WageTrackerForm extends JPanel {
 
     private JTextField monthlyWageField;

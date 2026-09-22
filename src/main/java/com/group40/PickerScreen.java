@@ -3,6 +3,15 @@ package com.group40;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The Picker screen class that will
+ * determine the buttons that will click
+ * into the tracker forms.
+ * 
+ * @author Amelia Vasquez Rosario
+ * @version September 22, 2026
+ */
+
 public class PickerScreen extends JPanel {
 
     public PickerScreen(CardLayout cardLayout, JPanel container)

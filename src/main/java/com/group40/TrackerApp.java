@@ -4,12 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import com.formdev.flatlaf.FlatLightLaf;
 
-// This is our main class that will run the program.
+/**
+ * The Tracker app class that will
+ * visually display the code.
+ * 
+ * @author Amelia Vasquez Rosario
+ * @version September 22, 2026
+ */
 
 public class TrackerApp extends JFrame
 {
 
     // fields
+    
     private CardLayout cardLayout;
     private JPanel container;
 
