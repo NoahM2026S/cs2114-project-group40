@@ -6,7 +6,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 /**
  * The Tracker app class that will
- * visually display the code.
+ * visually display the code and buttons
+ * from the picker screen class.
  * 
  * @author Amelia Vasquez Rosario
  * @version September 22, 2026
@@ -16,7 +17,7 @@ public class TrackerApp extends JFrame
 {
 
     // fields
-    
+
     private CardLayout cardLayout;
     private JPanel container;
 
@@ -28,6 +29,8 @@ public class TrackerApp extends JFrame
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        Image icon = new ImageIcon(getClass().getResource("/icon.png")).getImage();
+        setIconImage(icon);
         cardLayout = new CardLayout();
         container = new JPanel(cardLayout);
 
