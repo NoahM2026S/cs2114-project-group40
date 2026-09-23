@@ -68,7 +68,7 @@ public class PickerScreen extends JPanel
         button.setBackground(background);
         button.setForeground(textColor);
         button.setFont(button.getFont().deriveFont(Font.BOLD, 15f));
-        button.putClientProperty("JButton.arc", 18); // FlatLaf-specific: rounds this button's corners
+        button.putClientProperty("JButton.arc", 50); // FlatLaf-specific: rounds this button's corners
         button.setFocusPainted(false);
         return button;
     }
