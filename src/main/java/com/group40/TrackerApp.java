@@ -4,20 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import com.formdev.flatlaf.FlatLightLaf;
 
-/**
- * The Tracker app class that will
- * visually display the code and buttons
- * from the picker screen class.
- * 
- * @author Amelia Vasquez Rosario
- * @version September 22, 2026
- */
-
 public class TrackerApp extends JFrame
 {
 
     // fields
-
     private CardLayout cardLayout;
     private JPanel container;
 
@@ -25,29 +15,36 @@ public class TrackerApp extends JFrame
 
     public TrackerApp()
     {
-        setTitle("TODO");
+        setTitle("Tracker App");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // --- persistent header: icon + title, always visible ---
         ImageIcon rawIcon = new ImageIcon(getClass().getResource("/icon.png"));
-        Image scaledImage = rawIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        JLabel headerLabel = new JLabel(new ImageIcon(scaledImage));
-        add(headerLabel, BorderLayout.NORTH);
+        Image scaledImage = rawIcon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        JLabel headerIcon = new JLabel(new ImageIcon(scaledImage));
+
+        JLabel headerTitle = new JLabel("Tracker App");
+        headerTitle.setFont(headerTitle.getFont().deriveFont(Font.BOLD, 18f));
+        headerTitle.setForeground(new Color(0x2B2233));
+
+        JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 12));
+        headerPanel.setBackground(new Color(0xF7F5F0));
+        headerPanel.add(headerIcon);
+        headerPanel.add(headerTitle);
+
+        add(headerPanel, BorderLayout.NORTH);
+        // ----------------------------------------------------------
 
         cardLayout = new CardLayout();
         container = new JPanel(cardLayout);
 
-        // to do: create pickerscreen and add to container.
         PickerScreen pickerScreen = new PickerScreen(cardLayout, container);
         container.add(pickerScreen, "pickerScreen");
 
         add(container);
     }
 
-    /**
-     * The main method that runs the program.
-     * @param args The command line arguments.
-     */
     public static void main(String[] args)
     {
         try
@@ -64,5 +61,5 @@ public class TrackerApp extends JFrame
             app.setVisible(true);
         });
     }
-    
+
 }
