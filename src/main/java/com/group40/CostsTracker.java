@@ -7,7 +7,7 @@ package com.group40;
  * to work to cover the total expenses inputted by the user
  * and calculated by the tracker.
  * 
- * @author Amelia Vasquez Rosario
+ * @author Hasini Pottipati
  * @version September 23, 2026
  */
 public class CostsTracker extends Tracker {
