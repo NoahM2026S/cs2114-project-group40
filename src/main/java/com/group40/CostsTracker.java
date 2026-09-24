@@ -40,9 +40,13 @@ public class CostsTracker extends Tracker {
      * hourly wage inputted by the user.
      * 
      * @return The hours needed to cover the expenses.
+     * @throws IllegalArgumentException if the hourly wage is 0.
      */
-    public double getHoursNeeded()
+    public double getHours()
     {
+        if (hourlyWage == 0) {
+            throw new IllegalArgumentException("Hourly wage must be greater than 0.");
+        }
         return getExpenses() / hourlyWage;
     }
 
@@ -54,7 +58,18 @@ public class CostsTracker extends Tracker {
     @Override
     public double getResult()
     {
-        return getHoursNeeded();
+        return getHours();
+    }
+
+    /**    (non-Javadoc)
+     * Provides the summary in hours instead of dollars,
+     * and overrides the getSummary() method in the Tracker class.
+     * @return a string with the summary.
+     */
+    @Override
+    public String getSummary()
+    {
+        return title + ": " + String.format("%.2f", getResult()) + " hours";
     }
 
 }
