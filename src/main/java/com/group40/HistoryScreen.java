@@ -34,7 +34,7 @@ public class HistoryScreen extends JPanel {
     {
         listModel.clear();
 
-        for (Tracker tracker : SessionHistory.getEntries()) {
+        for (Tracker tracker: SessionHistory.getEntries()) {
             listModel.addElement(tracker.getSummary());
         }
     }
