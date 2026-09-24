@@ -5,9 +5,9 @@ import java.util.List;
 
 /**
  * The session history class.
- * This class stores every tracker the user submits
- * while the app is open. The history is not saved
- * to disk, so it resets when the app closes.
+ * This class owns the running list of completed tracker runs
+ * for this session. The history is not saved to disk,
+ * so it resets when the app closes.
  * 
  * @author Hasini Pottipati
  * @version September 23, 2026
@@ -16,28 +16,62 @@ public class SessionHistory {
 
     // fields
 
-    private static List<Tracker> entries = new ArrayList<>();
+    private List<Tracker> entries;
+
+    // constructor
+
+    /**
+     * Constructor for the SessionHistory class.
+     * Starts with an empty list.
+     */
+    public SessionHistory()
+    {
+        entries = new ArrayList<>();
+    }
 
     // methods
 
     /**
-     * Adds a tracker to the session history.
+     * Appends a completed tracker run to the end of the list.
      * 
      * @param tracker The tracker submitted by the user.
      */
-    public static void addEntry(Tracker tracker)
+    public void addEntry(Tracker tracker)
     {
         entries.add(tracker);
     }
 
     /**
-     * Provides the trackers in the session history.
+     * Provides the trackers in the order they were added.
      * 
      * @return The list of trackers.
      */
-    public static List<Tracker> getEntries()
+    public List<Tracker> getEntries()
     {
         return entries;
+    }
+
+    /**
+     * Removes the entry at the given index.
+     * 
+     * @param index The index of the entry to remove.
+     * @throws IndexOutOfBoundsException if the index is invalid.
+     */
+    public void deleteEntry(int index)
+    {
+        entries.remove(index);
+    }
+
+    /**
+     * Replaces the entry at the given index with an updated tracker.
+     * 
+     * @param index   The index of the entry to replace.
+     * @param updated The tracker with the new inputs.
+     * @throws IndexOutOfBoundsException if the index is invalid.
+     */
+    public void recalculate(int index, Tracker updated)
+    {
+        entries.set(index, updated);
     }
 
 }
