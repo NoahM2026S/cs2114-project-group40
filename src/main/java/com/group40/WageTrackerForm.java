@@ -65,7 +65,8 @@ public class WageTrackerForm extends JPanel {
 
         WageTracker tracker = new WageTracker(rent, amenities, groceries, wage);
 
-        // TODO: SessionHistory.addEntry(tracker); once Hasini's class exists
+        SessionHistory.addEntry(tracker);
+        JOptionPane.showMessageDialog(this, tracker.getSummary());
     }
 
 }

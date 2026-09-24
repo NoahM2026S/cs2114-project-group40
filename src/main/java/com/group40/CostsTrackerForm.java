@@ -65,7 +65,8 @@ public class CostsTrackerForm extends JPanel {
 
         CostsTracker tracker = new CostsTracker(rent, amenities, groceries, hourlyWage);
 
-        // TODO: SessionHistory.addEntry(tracker); once Hasini's class exists
+        SessionHistory.addEntry(tracker);
+        JOptionPane.showMessageDialog(this, tracker.getSummary());
     }
 
 }
