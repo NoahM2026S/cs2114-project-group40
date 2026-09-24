@@ -68,8 +68,41 @@ public class PickerScreen extends JPanel
         button.setBackground(background);
         button.setForeground(textColor);
         button.setFont(button.getFont().deriveFont(Font.BOLD, 15f));
-        button.putClientProperty("JButton.arc", 50); // FlatLaf-specific: rounds this button's corners
+        button.putClientProperty("FlatLaf.style", "arc: 999");
         button.setFocusPainted(false);
+
+        Color hoverColor = background.darker();
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            Timer timer;
+
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                animateTo(hoverColor);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                animateTo(background);
+            }
+
+            private void animateTo(Color target) {
+                if (timer != null && timer.isRunning()) timer.stop();
+                Color start = button.getBackground();
+                int steps = 10;
+                int[] count = {0};
+
+                timer = new Timer(15, e -> {
+                    count[0]++;
+                    float ratio = count[0] / (float) steps;
+                    int r = (int) (start.getRed() + (target.getRed() - start.getRed()) * ratio);
+                    int g = (int) (start.getGreen() + (target.getGreen() - start.getGreen()) * ratio);
+                    int b = (int) (start.getBlue() + (target.getBlue() - start.getBlue()) * ratio);
+                    button.setBackground(new Color(r, g, b));
+                    if (count[0] >= steps) timer.stop();
+                });
+                timer.start();
+            }
+        });
+
         return button;
     }
 
