@@ -3,6 +3,14 @@ package com.group40;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+* This is the history screen class. It'll display the icon, title, and subtitle
+* for the history screen. It will also display the previous tracker results.
+* 
+* @author Zachias Noble
+* @version September 23, 2026
+*
+*/
 public class HistoryScreen extends JPanel {
     public HistoryScreen() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
