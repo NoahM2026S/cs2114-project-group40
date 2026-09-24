@@ -30,7 +30,10 @@ public class TrackerApp extends JFrame
 
         WageTrackerForm wageForm = new WageTrackerForm();
         container.add(wageForm, "wageForm");
-
+        
+        CostsTrackerForm costsForm = new CostsTrackerForm();
+        container.add(costsForm, "costsForm");
+        
         add(container);
     }
 
