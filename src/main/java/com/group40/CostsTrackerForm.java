@@ -13,13 +13,17 @@ import java.awt.*;
 
 public class CostsTrackerForm extends JPanel {
 
+    private SessionHistory history;
+
     private JTextField hourlyWageField;
     private JTextField rentField;
     private JTextField amenitiesField;
     private JTextField groceriesField;
 
-    public CostsTrackerForm()
+    public CostsTrackerForm(CardLayout cardLayout, JPanel container, SessionHistory history)
     {
+        this.history = history;
+
         setLayout(new GridLayout(0, 2));
 
         add(new JLabel("Hourly Wage:"));
@@ -41,10 +45,42 @@ public class CostsTrackerForm extends JPanel {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> onSubmit());
         add(submitButton);
+
+        JButton historyButton = new JButton("View History");
+        historyButton.addActionListener(e -> cardLayout.show(container, "historyScreen"));
+        add(historyButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> cardLayout.show(container, "pickerScreen"));
+        add(backButton);
     }
 
-    private void onSubmit()
+    /**
+     * Validates the input, builds a CostsTracker,
+     * shows the result, and adds it to the session history.
+     */
+    public void onSubmit()
     {
+        JTextField[] fields = {hourlyWageField, rentField, amenitiesField, groceriesField};
+
+        // clear any highlights from the last submit
+        for (JTextField field : fields) {
+            field.putClientProperty("JComponent.outline", null);
+        }
+
+        // empty fields are checked before parsing
+        boolean hasEmpty = false;
+        for (JTextField field : fields) {
+            if (field.getText().trim().isEmpty()) {
+                field.putClientProperty("JComponent.outline", "error");
+                hasEmpty = true;
+            }
+        }
+        if (hasEmpty) {
+            JOptionPane.showMessageDialog(this, "Please fill in every field!  :)");
+            return;
+        }
+
         double hourlyWage, rent, amenities, groceries;
 
         try {
@@ -58,14 +94,34 @@ public class CostsTrackerForm extends JPanel {
             return;
         }
 
-        if (hourlyWage < 0 || rent < 0 || amenities < 0 || groceries < 0) {
+        double[] values = {hourlyWage, rent, amenities, groceries};
+        boolean hasNegative = false;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] < 0) {
+                fields[i].putClientProperty("JComponent.outline", "error");
+                hasNegative = true;
+            }
+        }
+        if (hasNegative) {
             JOptionPane.showMessageDialog(this, "Enter a number that is 0.0 or greater!  :)");
             return;
         }
 
         CostsTracker tracker = new CostsTracker(rent, amenities, groceries, hourlyWage);
 
-        // TODO: SessionHistory.addEntry(tracker); once Hasini's class exists
+        double hours;
+        try {
+            hours = tracker.getHours();
+        } catch (IllegalArgumentException e) {
+            hourlyWageField.putClientProperty("JComponent.outline", "error");
+            JOptionPane.showMessageDialog(this, "Enter an hourly wage greater than $0");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "You need to work " + String.format("%.2f", hours)
+            + " hours to cover your expenses.");
+
+        history.addEntry(tracker);
     }
 
 }
