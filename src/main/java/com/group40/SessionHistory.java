@@ -40,4 +40,13 @@ public class SessionHistory {
         return entries;
     }
 
+    /**
+     * Clears all entries from the session history.
+     * Added by Ame! :)
+     */
+    public static void clearAll()
+    {
+        entries.clear();
+    }
+
 }

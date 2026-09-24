@@ -60,4 +60,14 @@ public class WageTracker extends Tracker {
         return getRemaining();
     }
 
+    @Override
+    public String getSummary()
+    {
+        if (getRemaining() < 0)
+        {
+            return String.format("Wage Tracker: You're $%.2f short of covering your expenses.", Math.abs(getRemaining()));
+        }
+        return String.format("Wage Tracker: You have $%.2f left over after expenses.", getRemaining());
+    }
+
 }

@@ -43,6 +43,10 @@ public class CostsTracker extends Tracker {
      */
     public double getHoursNeeded()
     {
+        if (hourlyWage <= 0)
+        {
+        throw new IllegalArgumentException("Hourly wage must be greater than 0.");
+        }
         return getExpenses() / hourlyWage;
     }
 
@@ -57,4 +61,9 @@ public class CostsTracker extends Tracker {
         return getHoursNeeded();
     }
 
+    @Override
+    public String getSummary()
+    {
+        return String.format("Costs Tracker: You need to work %.1f hours to cover your expenses.", getHoursNeeded());
+    }
 }

@@ -28,11 +28,14 @@ public class TrackerApp extends JFrame
         PickerScreen pickerScreen = new PickerScreen(cardLayout, container);
         container.add(pickerScreen, "pickerScreen");
 
-        WageTrackerForm wageForm = new WageTrackerForm();
+        WageTrackerForm wageForm = new WageTrackerForm(cardLayout, container);
         container.add(wageForm, "wageForm");
         
-        CostsTrackerForm costsForm = new CostsTrackerForm();
+        CostsTrackerForm costsForm = new CostsTrackerForm(cardLayout, container);
         container.add(costsForm, "costsForm");
+
+        HistoryScreen historyScreen = new HistoryScreen(cardLayout, container);
+        container.add(historyScreen, "historyScreen");
         
         add(container);
     }

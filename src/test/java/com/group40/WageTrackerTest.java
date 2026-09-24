@@ -121,8 +121,15 @@ public class WageTrackerTest
     }
 
     @Test
-    public void testInheritedSummaryUsesWageResult()
+    public void testSummaryWithLeftoverMoney()
     {
-        assertEquals("Wage Tracker: $600.00", tracker.getSummary());
+        assertEquals("Wage Tracker: You have $600.00 left over after expenses.", tracker.getSummary());
+    }
+
+    @Test
+    public void testSummaryWithShortfall()
+    {
+        WageTracker shortfall = new WageTracker(500.0, 100.0, 300.0, 500.0);
+        assertEquals("Wage Tracker: You're $400.00 short of covering your expenses.", shortfall.getSummary());
     }
 }
